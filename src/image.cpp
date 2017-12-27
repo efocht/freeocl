@@ -28,15 +28,15 @@
 extern "C"
 {
 	cl_mem clCreateImageCommonFCL (cl_context context,
-								   cl_mem_flags flags,
-								   const cl_image_format *image_format,
-								   size_t image_width,
-								   size_t image_height,
-								   size_t image_depth,
-								   size_t image_row_pitch,
-								   size_t image_slice_pitch,
-								   void *host_ptr,
-								   cl_int *errcode_ret)
+                                       cl_mem_flags flags,
+                                       const cl_image_format *image_format,
+                                       size_t image_width,
+                                       size_t image_height,
+                                       size_t image_depth,
+                                       size_t image_row_pitch,
+                                       size_t image_slice_pitch,
+                                       void *host_ptr,
+                                       cl_int *errcode_ret)
 	{
 		MSG(clCreateImageCommonFCL);
 		if (image_format == NULL)
@@ -143,10 +143,10 @@ extern "C"
 		case CL_UNSIGNED_INT8:	data_size = 1;	break;
 		case CL_UNSIGNED_INT16:	data_size = 2;	break;
 		case CL_UNSIGNED_INT32:	data_size = 4;	break;
-		case CL_HALF_FLOAT:		data_size = 2;	break;
-		case CL_FLOAT:			data_size = 4;	break;
+		case CL_HALF_FLOAT:	data_size = 2;	break;
+		case CL_FLOAT:		data_size = 4;	break;
 
-		case CL_SNORM_INT8:			data_size = 1;	break;
+		case CL_SNORM_INT8:		data_size = 1;	break;
 		case CL_SNORM_INT16:		data_size = 2;	break;
 		case CL_UNORM_SHORT_565:	data_size = 2;	break;
 		case CL_UNORM_SHORT_555:	data_size = 2;	break;
@@ -157,10 +157,10 @@ extern "C"
 		}
 
 		const size_t element_size = image_format->image_channel_data_type == CL_UNORM_SHORT_555
-									|| image_format->image_channel_data_type == CL_UNORM_SHORT_565
-									|| image_format->image_channel_data_type == CL_UNORM_INT_101010
-									? data_size
-									: channels * data_size;
+                  || image_format->image_channel_data_type == CL_UNORM_SHORT_565
+                  || image_format->image_channel_data_type == CL_UNORM_INT_101010
+                  ? data_size
+                  : channels * data_size;
 
 		if (image_row_pitch == 0)
 			image_row_pitch = image_width * element_size;
@@ -224,13 +224,13 @@ extern "C"
 	}
 
 	cl_mem clCreateImage2DFCL (cl_context context,
-							cl_mem_flags flags,
-							const cl_image_format *image_format,
-							size_t image_width,
-							size_t image_height,
-							size_t image_row_pitch,
-							void *host_ptr,
-							cl_int *errcode_ret)
+                                   cl_mem_flags flags,
+                                   const cl_image_format *image_format,
+                                   size_t image_width,
+                                   size_t image_height,
+                                   size_t image_row_pitch,
+                                   void *host_ptr,
+                                   cl_int *errcode_ret)
 	{
 		MSG(clCreateImage2DFCL);
 		if (image_width == 0
@@ -257,15 +257,15 @@ extern "C"
 	}
 
 	cl_mem clCreateImage3DFCL (cl_context context,
-							cl_mem_flags flags,
-							const cl_image_format *image_format,
-							size_t image_width,
-							size_t image_height,
-							size_t image_depth,
-							size_t image_row_pitch,
-							size_t image_slice_pitch,
-							void *host_ptr,
-							cl_int *errcode_ret)
+                                   cl_mem_flags flags,
+                                   const cl_image_format *image_format,
+                                   size_t image_width,
+                                   size_t image_height,
+                                   size_t image_depth,
+                                   size_t image_row_pitch,
+                                   size_t image_slice_pitch,
+                                   void *host_ptr,
+                                   cl_int *errcode_ret)
 	{
 		MSG(clCreateImage3DFCL);
 		if (image_width == 0
@@ -279,26 +279,26 @@ extern "C"
 			return 0;
 		}
 		cl_mem mem = clCreateImageCommonFCL(context,
-											flags,
-											image_format,
-											image_width,
-											image_height,
-											image_depth,
-											image_row_pitch,
-											image_slice_pitch,
-											host_ptr,
-											errcode_ret);
+                                                    flags,
+                                                    image_format,
+                                                    image_width,
+                                                    image_height,
+                                                    image_depth,
+                                                    image_row_pitch,
+                                                    image_slice_pitch,
+                                                    host_ptr,
+                                                    errcode_ret);
 		if (mem)
 			mem->mem_type = CL_MEM_OBJECT_IMAGE3D;
 		return mem;
 	}
 
 	cl_int clGetSupportedImageFormatsFCL (cl_context context,
-									   cl_mem_flags flags,
-									   cl_mem_object_type image_type,
-									   cl_uint num_entries,
-									   cl_image_format *image_formats,
-									   cl_uint *num_image_formats)
+                                              cl_mem_flags flags,
+                                              cl_mem_object_type image_type,
+                                              cl_uint num_entries,
+                                              cl_image_format *image_formats,
+                                              cl_uint *num_image_formats)
 	{
 		MSG(clGetSupportedImageFormatsFCL);
 		if (image_type != CL_MEM_OBJECT_IMAGE2D
@@ -388,16 +388,16 @@ extern "C"
 	}
 
 	cl_int clEnqueueReadImageFCL (cl_command_queue command_queue,
-							   cl_mem image,
-							   cl_bool blocking_read,
-							   const size_t origin[3],
-							   const size_t region[3],
-							   size_t row_pitch,
-							   size_t slice_pitch,
-							   void *ptr,
-							   cl_uint num_events_in_wait_list,
-							   const cl_event *event_wait_list,
-							   cl_event *event)
+                                      cl_mem image,
+                                      cl_bool blocking_read,
+                                      const size_t origin[3],
+                                      const size_t region[3],
+                                      size_t row_pitch,
+                                      size_t slice_pitch,
+                                      void *ptr,
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event *event_wait_list,
+                                      cl_event *event)
 	{
 		MSG(clEnqueueReadImageFCL);
 
@@ -488,16 +488,16 @@ extern "C"
 	}
 
 	cl_int clEnqueueWriteImageFCL (cl_command_queue command_queue,
-								cl_mem image,
-								cl_bool blocking_write,
-								const size_t origin[3],
-								const size_t region[3],
-								size_t input_row_pitch,
-								size_t input_slice_pitch,
-								const void * ptr,
-								cl_uint num_events_in_wait_list,
-								const cl_event *event_wait_list,
-								cl_event *event)
+                                       cl_mem image,
+                                       cl_bool blocking_write,
+                                       const size_t origin[3],
+                                       const size_t region[3],
+                                       size_t input_row_pitch,
+                                       size_t input_slice_pitch,
+                                       const void * ptr,
+                                       cl_uint num_events_in_wait_list,
+                                       const cl_event *event_wait_list,
+                                       cl_event *event)
 	{
 		MSG(clEnqueueWriteImageFCL);
 
@@ -588,14 +588,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueCopyImageFCL (cl_command_queue command_queue,
-							   cl_mem src_image,
-							   cl_mem dst_image,
-							   const size_t src_origin[3],
-							   const size_t dst_origin[3],
-							   const size_t region[3],
-							   cl_uint num_events_in_wait_list,
-							   const cl_event *event_wait_list,
-							   cl_event *event)
+                                      cl_mem src_image,
+                                      cl_mem dst_image,
+                                      const size_t src_origin[3],
+                                      const size_t dst_origin[3],
+                                      const size_t region[3],
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event *event_wait_list,
+                                      cl_event *event)
 	{
 		MSG(clEnqueueCopyImageFCL);
 		if (region[0] == 0
@@ -695,14 +695,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueCopyImageToBufferFCL (cl_command_queue command_queue,
-									   cl_mem src_image,
-									   cl_mem dst_buffer,
-									   const size_t src_origin[3],
-									   const size_t region[3],
-									   size_t dst_offset,
-									   cl_uint num_events_in_wait_list,
-									   const cl_event *event_wait_list,
-									   cl_event *event)
+                                              cl_mem src_image,
+                                              cl_mem dst_buffer,
+                                              const size_t src_origin[3],
+                                              const size_t region[3],
+                                              size_t dst_offset,
+                                              cl_uint num_events_in_wait_list,
+                                              const cl_event *event_wait_list,
+                                              cl_event *event)
 	{
 		MSG(clEnqueueCopyImageToBufferFCL);
 		if (region[0] == 0
@@ -780,14 +780,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueCopyBufferToImageFCL (cl_command_queue command_queue,
-									   cl_mem src_buffer,
-									   cl_mem dst_image,
-									   size_t src_offset,
-									   const size_t dst_origin[3],
-									   const size_t region[3],
-									   cl_uint num_events_in_wait_list,
-									   const cl_event *event_wait_list,
-									   cl_event *event)
+                                              cl_mem src_buffer,
+                                              cl_mem dst_image,
+                                              size_t src_offset,
+                                              const size_t dst_origin[3],
+                                              const size_t region[3],
+                                              cl_uint num_events_in_wait_list,
+                                              const cl_event *event_wait_list,
+                                              cl_event *event)
 	{
 		MSG(clEnqueueCopyBufferToImageFCL);
 		if (region[0] == 0
@@ -865,17 +865,17 @@ extern "C"
 	}
 
 	void *clEnqueueMapImageFCL (cl_command_queue command_queue,
-							  cl_mem image,
-							  cl_bool blocking_map,
-							  cl_map_flags map_flags,
-							  const size_t origin[3],
-							  const size_t region[3],
-							  size_t *image_row_pitch,
-							  size_t *image_slice_pitch,
-							  cl_uint num_events_in_wait_list,
-							  const cl_event *event_wait_list,
-							  cl_event *event,
-							  cl_int *errcode_ret)
+                                    cl_mem image,
+                                    cl_bool blocking_map,
+                                    cl_map_flags map_flags,
+                                    const size_t origin[3],
+                                    const size_t region[3],
+                                    size_t *image_row_pitch,
+                                    size_t *image_slice_pitch,
+                                    cl_uint num_events_in_wait_list,
+                                    const cl_event *event_wait_list,
+                                    cl_event *event,
+                                    cl_int *errcode_ret)
 	{
 		MSG(clEnqueueMapImageFCL);
 
@@ -991,10 +991,10 @@ extern "C"
 	}
 
 	cl_int clGetImageInfoFCL (cl_mem image,
-						   cl_image_info param_name,
-						   size_t param_value_size,
-						   void *param_value,
-						   size_t *param_value_size_ret)
+                                  cl_image_info param_name,
+                                  size_t param_value_size,
+                                  void *param_value,
+                                  size_t *param_value_size_ret)
 	{
 		MSG(clGetImageInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -1077,11 +1077,11 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_mem CL_API_CALL	clCreateImageFCL(cl_context              context,
-													 cl_mem_flags            flags,
-													 const cl_image_format * image_format,
-													 const cl_image_desc *   image_desc,
-													 void *                  host_ptr,
-													 cl_int *                errcode_ret) CL_API_SUFFIX__VERSION_1_2
+                                                         cl_mem_flags            flags,
+                                                         const cl_image_format * image_format,
+                                                         const cl_image_desc *   image_desc,
+                                                         void *                  host_ptr,
+                                                         cl_int *                errcode_ret) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clCreateImageFCL);
 		if (!image_desc)
@@ -1399,13 +1399,13 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clEnqueueFillImageFCL(cl_command_queue   command_queue,
-														  cl_mem             image,
-														  const void *       fill_color,
-														  const size_t *     origin,
-														  const size_t *     region,
-														  cl_uint            num_events_in_wait_list,
-														  const cl_event *   event_wait_list,
-														  cl_event *         event) CL_API_SUFFIX__VERSION_1_2
+                                                              cl_mem             image,
+                                                              const void *       fill_color,
+                                                              const size_t *     origin,
+                                                              const size_t *     region,
+                                                              cl_uint            num_events_in_wait_list,
+                                                              const cl_event *   event_wait_list,
+                                                              cl_event *         event) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clEnqueueFillImageFCL);
 		if (fill_color == NULL
@@ -1579,8 +1579,8 @@ namespace FreeOCL
 		case CL_LUMINANCE:
 			{
 				const float y = ((const float*)fill_color)[0] * 0.299f
-								+ ((const float*)fill_color)[1] * 0.587f
-								+ ((const float*)fill_color)[2] * 0.114f;
+                                  + ((const float*)fill_color)[1] * 0.587f
+                                  + ((const float*)fill_color)[2] * 0.114f;
 				switch(buffer->image_format.image_channel_data_type)
 				{
 				case CL_UNORM_INT8:

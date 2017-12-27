@@ -24,10 +24,10 @@
 extern "C"
 {
 	cl_sampler clCreateSamplerFCL (cl_context context,
-								cl_bool normalized_coords,
-								cl_addressing_mode addressing_mode,
-								cl_filter_mode filter_mode,
-								cl_int *errcode_ret)
+                                       cl_bool normalized_coords,
+                                       cl_addressing_mode addressing_mode,
+                                       cl_filter_mode filter_mode,
+                                       cl_int *errcode_ret)
 	{
 		MSG(clCreateSamplerFCL);
 
@@ -79,10 +79,10 @@ extern "C"
 	}
 
 	cl_int clGetSamplerInfoFCL (cl_sampler sampler,
-							 cl_sampler_info param_name,
-							 size_t param_value_size,
-							 void *param_value,
-							 size_t *param_value_size_ret)
+                                    cl_sampler_info param_name,
+                                    size_t param_value_size,
+                                    void *param_value,
+                                    size_t *param_value_size_ret)
 	{
 		MSG(clGetSamplerInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -94,7 +94,7 @@ extern "C"
 		switch(param_name)
 		{
 		case CL_SAMPLER_REFERENCE_COUNT:	bTooSmall = SET_VAR(sampler->get_ref_count());	break;
-		case CL_SAMPLER_CONTEXT:			bTooSmall = SET_VAR(sampler->context);	break;
+		case CL_SAMPLER_CONTEXT:		bTooSmall = SET_VAR(sampler->context);	break;
 		case CL_SAMPLER_NORMALIZED_COORDS:	bTooSmall = SET_VAR(sampler->normalized_coords);	break;
 		case CL_SAMPLER_ADDRESSING_MODE:	bTooSmall = SET_VAR(sampler->addressing_mode);	break;
 		case CL_SAMPLER_FILTER_MODE:		bTooSmall = SET_VAR(sampler->filter_mode);	break;

@@ -28,18 +28,18 @@
 
 #define SET_STRING(X)	FreeOCL::copy_memory_within_limits(X, strlen(X) + 1, param_value_size, param_value, param_value_size_ret)
 #define SET_VAR(X)	FreeOCL::copy_memory_within_limits(&(X), sizeof(X),\
-														param_value_size,\
-														param_value,\
-														param_value_size_ret)
+                                                           param_value_size, \
+                                                           param_value, \
+                                                           param_value_size_ret)
 #define SET_RET(X)	if (errcode_ret)	*errcode_ret = (X)
 
 extern "C"
 {
 	cl_program clCreateProgramWithSourceFCL (cl_context context,
-										  cl_uint count,
-										  const char **strings,
-										  const size_t *lengths,
-										  cl_int *errcode_ret)
+                                                 cl_uint count,
+                                                 const char **strings,
+                                                 const size_t *lengths,
+                                                 cl_int *errcode_ret)
 	{
 		MSG(clCreateProgramWithSourceFCL);
 		if (count == 0 || strings == NULL)
@@ -77,12 +77,12 @@ extern "C"
 	}
 
 	cl_program clCreateProgramWithBinaryFCL (cl_context context,
-										  cl_uint num_devices,
-										  const cl_device_id *device_list,
-										  const size_t *lengths,
-										  const unsigned char **binaries,
-										  cl_int *binary_status,
-										  cl_int *errcode_ret)
+                                                 cl_uint num_devices,
+                                                 const cl_device_id *device_list,
+                                                 const size_t *lengths,
+                                                 const unsigned char **binaries,
+                                                 cl_int *binary_status,
+                                                 cl_int *errcode_ret)
 	{
 		MSG(clCreateProgramWithBinaryFCL);
 		if (num_devices == 0 || device_list == NULL
@@ -134,8 +134,10 @@ extern "C"
 
 		const unsigned char *ptr = binaries[0];
 		size_t offset = 0;
-		program->binary_type = *(const cl_program_binary_type*)ptr;	offset += sizeof(cl_program_binary_type);
-		const size_t size_of_binary_data = *(const size_t*)(ptr + offset);	offset += sizeof(size_t);
+		program->binary_type = *(const cl_program_binary_type*)ptr;
+                offset += sizeof(cl_program_binary_type);
+		const size_t size_of_binary_data = *(const size_t*)(ptr + offset);
+                offset += sizeof(size_t);
 		// Creates a unique temporary file to write the binary data
 		size_t n = 0;
 		int fd_out = -1;
@@ -166,18 +168,23 @@ extern "C"
 
 			fd_out = open(filename_out.c_str(), O_EXCL | O_CREAT | O_WRONLY, S_IWUSR | S_IRUSR | S_IXUSR);
 		}
-		const size_t written_bytes = write(fd_out, ptr + offset, size_of_binary_data);	offset += size_of_binary_data;
+		const size_t written_bytes = write(fd_out, ptr + offset, size_of_binary_data);
+                offset += size_of_binary_data;
 		close(fd_out);
 		program->binary_file = filename_out;
 
-		const size_t number_of_kernels = *(const size_t*)(ptr + offset);	offset += sizeof(size_t);
+		const size_t number_of_kernels = *(const size_t*)(ptr + offset);
+                offset += sizeof(size_t);
 		for(size_t i = 0 ; i < number_of_kernels ; ++i)
 		{
-			const size_t kernel_name_size = *(const size_t*)(ptr + offset);	offset += sizeof(size_t);
-			program->kernel_names.insert(std::string((const char*)(ptr + offset), kernel_name_size));	offset += kernel_name_size;
+			const size_t kernel_name_size = *(const size_t*)(ptr + offset);
+                        offset += sizeof(size_t);
+			program->kernel_names.insert(std::string((const char*)(ptr + offset), kernel_name_size));
+                        offset += kernel_name_size;
 		}
 
-		const size_t build_options_size = *(const size_t*)(ptr + offset);	offset += sizeof(size_t);
+		const size_t build_options_size = *(const size_t*)(ptr + offset);
+                offset += sizeof(size_t);
 		program->build_options = std::string((const char*)(ptr + offset), build_options_size);
 
 		if (program->binary_type == CL_PROGRAM_BINARY_TYPE_EXECUTABLE)
@@ -224,12 +231,12 @@ extern "C"
 	}
 
 	cl_int clBuildProgramFCL (cl_program program,
-						   cl_uint num_devices,
-						   const cl_device_id *device_list,
-						   const char *options,
-						   void (CL_CALLBACK *pfn_notify)(cl_program program,
-														  void *user_data),
-						   void *user_data)
+                                  cl_uint num_devices,
+                                  const cl_device_id *device_list,
+                                  const char *options,
+                                  void (CL_CALLBACK *pfn_notify)(cl_program program,
+                                                                 void *user_data),
+                                  void *user_data)
 	{
 		MSG(clBuildProgramFCL);
 		if (device_list == NULL && num_devices > 0)
@@ -269,13 +276,13 @@ extern "C"
 		bool b_valid_options = true;
 		FreeOCL::set<std::string> kernel_names;
 		const std::string binary_file = FreeOCL::build_program(options ? options : std::string(),
-															   source_code,
-															   build_log,
-															   kernel_names,
-															   b_valid_options,
-															   false,
-															   FreeOCL::map<std::string, std::string>(),
-															   &(program->temporary_file));
+                                                                       source_code,
+                                                                       build_log,
+                                                                       kernel_names,
+                                                                       b_valid_options,
+                                                                       false,
+                                                                       FreeOCL::map<std::string, std::string>(),
+                                                                       &(program->temporary_file));
 
 		if (!b_valid_options)
 		{
@@ -332,10 +339,10 @@ extern "C"
 	}
 
 	cl_int clGetProgramInfoFCL (cl_program program,
-							 cl_program_info param_name,
-							 size_t param_value_size,
-							 void *param_value,
-							 size_t *param_value_size_ret)
+                                    cl_program_info param_name,
+                                    size_t param_value_size,
+                                    void *param_value,
+                                    size_t *param_value_size_ret)
 	{
 		MSG(clGetProgramInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -347,7 +354,7 @@ extern "C"
 		switch(param_name)
 		{
 		case CL_PROGRAM_REFERENCE_COUNT:	bTooSmall = SET_VAR(program->get_ref_count());	break;
-		case CL_PROGRAM_CONTEXT:			bTooSmall = SET_VAR(program->context);	break;
+		case CL_PROGRAM_CONTEXT:		bTooSmall = SET_VAR(program->context);	break;
 		case CL_PROGRAM_NUM_DEVICES:
 			{
 				const cl_uint nb = program->devices.size();
@@ -356,17 +363,17 @@ extern "C"
 			break;
 		case CL_PROGRAM_DEVICES:
 			bTooSmall = FreeOCL::copy_memory_within_limits(&(program->devices.front()),
-														   program->devices.size() * sizeof(cl_device_id),
-														   param_value_size,
-														   param_value,
-														   param_value_size_ret);
+                                                                       program->devices.size() * sizeof(cl_device_id),
+                                                                       param_value_size,
+                                                                       param_value,
+                                                                       param_value_size_ret);
 			break;
 		case CL_PROGRAM_SOURCE:
 			bTooSmall = FreeOCL::copy_memory_within_limits(program->source_code.c_str(),
-														   program->source_code.size() + 1,
-														   param_value_size,
-														   param_value,
-														   param_value_size_ret);
+                                                                       program->source_code.size() + 1,
+                                                                       param_value_size,
+                                                                       param_value,
+                                                                       param_value_size_ret);
 			break;
 		case CL_PROGRAM_BINARY_SIZES:
 			{
@@ -386,10 +393,10 @@ extern "C"
 										   + sizeof(size_t) + program->build_options.size();
 				sizes.resize(program->devices.size(), binary_size);
 				bTooSmall = FreeOCL::copy_memory_within_limits(&(sizes.front()),
-															   sizes.size() * sizeof(size_t),
-															   param_value_size,
-															   param_value,
-															   param_value_size_ret);
+                                                                               sizes.size() * sizeof(size_t),
+                                                                               param_value_size,
+                                                                               param_value,
+                                                                               param_value_size_ret);
 			}
 			break;
 		case CL_PROGRAM_BINARIES:
@@ -403,7 +410,8 @@ extern "C"
 					continue;
 				size_t offset = 0;
 				// Write binary type
-				*(cl_program_binary_type*)ptr = program->binary_type;	offset += sizeof(cl_program_binary_type);
+				*(cl_program_binary_type*)ptr = program->binary_type;
+                                offset += sizeof(cl_program_binary_type);
 
 				// Write binary data
 				struct stat file_stat;
@@ -413,11 +421,13 @@ extern "C"
 				*(size_t*)(ptr + offset) = binary_file_size;	offset += sizeof(size_t);
 
 				std::fstream binary_file(program->binary_file.c_str(), std::ios_base::in | std::ios_base::binary);
-				binary_file.read(ptr + offset, binary_file_size);	offset += binary_file_size;
+				binary_file.read(ptr + offset, binary_file_size);
+                                offset += binary_file_size;
 				binary_file.close();
 
 				// Write kernel names
-				*(size_t*)(ptr + offset) = program->kernel_names.size();	offset += sizeof(size_t);
+				*(size_t*)(ptr + offset) = program->kernel_names.size();
+                                offset += sizeof(size_t);
 				for(FreeOCL::set<std::string>::const_iterator it = program->kernel_names.begin()
 					; it != program->kernel_names.end()
 					; ++it)
@@ -446,7 +456,8 @@ extern "C"
 			else
 			{
 				std::string names;
-				for(FreeOCL::set<std::string>::const_iterator it = program->kernel_names.begin() ; it != program->kernel_names.end() ; ++it)
+				for(FreeOCL::set<std::string>::const_iterator it = program->kernel_names.begin() ;
+                                    it != program->kernel_names.end() ; ++it)
 				{
 					if (!names.empty())
 						names += ';';
@@ -466,11 +477,11 @@ extern "C"
 	}
 
 	cl_int clGetProgramBuildInfoFCL (cl_program program,
-								  cl_device_id device,
-								  cl_program_build_info param_name,
-								  size_t param_value_size,
-								  void *param_value,
-								  size_t *param_value_size_ret)
+                                         cl_device_id device,
+                                         cl_program_build_info param_name,
+                                         size_t param_value_size,
+                                         void *param_value,
+                                         size_t *param_value_size_ret)
 	{
 		MSG(clGetProgramBuildInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -487,17 +498,17 @@ extern "C"
 		case CL_PROGRAM_BUILD_STATUS:		bTooSmall = SET_VAR(program->build_status);	break;
 		case CL_PROGRAM_BUILD_OPTIONS:
 			bTooSmall = FreeOCL::copy_memory_within_limits(program->build_options.c_str(),
-														   program->build_options.size() + 1,
-														   param_value_size,
-														   param_value,
-														   param_value_size_ret);
+                                                                       program->build_options.size() + 1,
+                                                                       param_value_size,
+                                                                       param_value,
+                                                                       param_value_size_ret);
 			break;
 		case CL_PROGRAM_BUILD_LOG:
 			bTooSmall = FreeOCL::copy_memory_within_limits(program->build_log.c_str(),
-														   program->build_log.size() + 1,
-														   param_value_size,
-														   param_value,
-														   param_value_size_ret);
+                                                                       program->build_log.size() + 1,
+                                                                       param_value_size,
+                                                                       param_value,
+                                                                       param_value_size_ret);
 			break;
 		case CL_PROGRAM_BINARY_TYPE:		bTooSmall = SET_VAR(program->binary_type);	break;
 		default:
@@ -510,10 +521,10 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_program CL_API_CALL clCreateProgramWithBuiltInKernelsFCL(cl_context            context,
-																			 cl_uint               num_devices,
-																			 const cl_device_id *  device_list,
-																			 const char *          kernel_names,
-																			 cl_int *              errcode_ret) CL_API_SUFFIX__VERSION_1_2
+                                                                                 cl_uint               num_devices,
+                                                                                 const cl_device_id *  device_list,
+                                                                                 const char *          kernel_names,
+                                                                                 cl_int *              errcode_ret) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clCreateProgramWithBuiltInKernelsFCL);
 		if (device_list == NULL && num_devices > 0)
@@ -579,14 +590,14 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clCompileProgramFCL(cl_program           program,
-														cl_uint              num_devices,
-														const cl_device_id * device_list,
-														const char *         options,
-														cl_uint              num_input_headers,
-														const cl_program *   input_headers,
-														const char **        header_include_names,
-														void (CL_CALLBACK *  pfn_notify)(cl_program /* program */, void * /* user_data */),
-														void *               user_data) CL_API_SUFFIX__VERSION_1_2
+                                                            cl_uint              num_devices,
+                                                            const cl_device_id * device_list,
+                                                            const char *         options,
+                                                            cl_uint              num_input_headers,
+                                                            const cl_program *   input_headers,
+                                                            const char **        header_include_names,
+                                                            void (CL_CALLBACK *  pfn_notify)(cl_program /* program */, void * /* user_data */),
+                                                            void *               user_data) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clCompileProgramFCL);
 		if (device_list == NULL && num_devices > 0)
@@ -637,13 +648,13 @@ extern "C"
 		bool b_valid_options = true;
 		FreeOCL::set<std::string> kernel_names;
 		const std::string binary_file = FreeOCL::build_program(options ? options : std::string(),
-															   source_code,
-															   build_log,
-															   kernel_names,
-															   b_valid_options,
-															   true,
-															   headers,
-															   &(program->temporary_file));
+                                                                       source_code,
+                                                                       build_log,
+                                                                       kernel_names,
+                                                                       b_valid_options,
+                                                                       true,
+                                                                       headers,
+                                                                       &(program->temporary_file));
 
 		if (!b_valid_options)
 		{
@@ -675,14 +686,14 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_program CL_API_CALL	clLinkProgramFCL(cl_context           context,
-														 cl_uint              num_devices,
-														 const cl_device_id * device_list,
-														 const char *         options,
-														 cl_uint              num_input_programs,
-														 const cl_program *   input_programs,
-														 void (CL_CALLBACK *  pfn_notify)(cl_program /* program */, void * /* user_data */),
-														 void *               user_data,
-														 cl_int *             errcode_ret) CL_API_SUFFIX__VERSION_1_2
+                                                                 cl_uint              num_devices,
+                                                                 const cl_device_id * device_list,
+                                                                 const char *         options,
+                                                                 cl_uint              num_input_programs,
+                                                                 const cl_program *   input_programs,
+                                                                 void (CL_CALLBACK *  pfn_notify)(cl_program /* program */, void * /* user_data */),
+                                                                 void *               user_data,
+                                                                 cl_int *             errcode_ret) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clLinkProgramFCL);
 		if (pfn_notify == NULL && user_data != NULL)
@@ -737,9 +748,9 @@ extern "C"
 		std::stringstream log;
 		bool b_valid_options = true;
 		const std::string &binary_file = FreeOCL::link_program(options ? options : "",
-															   files_to_link,
-															   log,
-															   b_valid_options);
+                                                                       files_to_link,
+                                                                       log,
+                                                                       b_valid_options);
 		if (!b_valid_options)
 		{
 			SET_RET(CL_INVALID_LINKER_OPTIONS);
@@ -754,8 +765,8 @@ extern "C"
 		cl_program program = new _cl_program(context);
 		program->binary_file = binary_file;
 		program->binary_type = (*binary_file.rbegin() == 'a')
-							   ? CL_PROGRAM_BINARY_TYPE_LIBRARY
-							   : CL_PROGRAM_BINARY_TYPE_EXECUTABLE;
+                  ? CL_PROGRAM_BINARY_TYPE_LIBRARY
+                  : CL_PROGRAM_BINARY_TYPE_EXECUTABLE;
 		program->build_options = options ? options : "";
 		program->build_log = log.str();
 		program->kernel_names.swap(kernel_names);

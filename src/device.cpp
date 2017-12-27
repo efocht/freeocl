@@ -42,10 +42,10 @@ namespace
 extern "C"
 {
 	cl_int clGetDeviceInfoFCL (cl_device_id device,
-							cl_device_info param_name,
-							size_t param_value_size,
-							void *param_value,
-							size_t *param_value_size_ret)
+                                   cl_device_info param_name,
+                                   size_t param_value_size,
+                                   void *param_value,
+                                   size_t *param_value_size_ret)
 	{
 		MSG(clGetDeviceInfoFCL);
 		if (device != FreeOCL::device)
@@ -53,81 +53,81 @@ extern "C"
 		bool bTooSmall = false;
 		switch(param_name)
 		{
-		case CL_DEVICE_TYPE:							bTooSmall = SET_VAR(device->device_type);	break;
-		case CL_DEVICE_VENDOR_ID:						bTooSmall = SET_VAR(device->vendor_id);		break;
-		case CL_DEVICE_MAX_COMPUTE_UNITS:				bTooSmall = SET_VAR(device->cpu_cores);		break;
-		case CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS:		bTooSmall = SET_VAR(device->max_work_item_dimensions);	break;
-		case CL_DEVICE_MAX_WORK_ITEM_SIZES:				bTooSmall = SET_VAR(device->max_work_item_sizes);	break;
-		case CL_DEVICE_MAX_WORK_GROUP_SIZE:				bTooSmall = SET_VAR(device->max_work_group_size);	break;
-		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR:		bTooSmall = SET_VAR(device->preferred_vector_width_char);	break;
+		case CL_DEVICE_TYPE:				bTooSmall = SET_VAR(device->device_type);	break;
+		case CL_DEVICE_VENDOR_ID:			bTooSmall = SET_VAR(device->vendor_id);		break;
+		case CL_DEVICE_MAX_COMPUTE_UNITS:		bTooSmall = SET_VAR(device->cpu_cores);		break;
+		case CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS:	bTooSmall = SET_VAR(device->max_work_item_dimensions);	break;
+		case CL_DEVICE_MAX_WORK_ITEM_SIZES:		bTooSmall = SET_VAR(device->max_work_item_sizes);	break;
+		case CL_DEVICE_MAX_WORK_GROUP_SIZE:		bTooSmall = SET_VAR(device->max_work_group_size);	break;
+		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR:	bTooSmall = SET_VAR(device->preferred_vector_width_char);	break;
 		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_SHORT:	bTooSmall = SET_VAR(device->preferred_vector_width_short);	break;
-		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT:		bTooSmall = SET_VAR(device->preferred_vector_width_int);	break;
-		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG:		bTooSmall = SET_VAR(device->preferred_vector_width_long);	break;
+		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT:	bTooSmall = SET_VAR(device->preferred_vector_width_int);	break;
+		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG:	bTooSmall = SET_VAR(device->preferred_vector_width_long);	break;
 		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT:	bTooSmall = SET_VAR(device->preferred_vector_width_float);	break;
 		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE:	bTooSmall = SET_VAR(device->preferred_vector_width_double);	break;
-		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF:		bTooSmall = SET_VAR(device->preferred_vector_width_half);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR:		bTooSmall = SET_VAR(device->native_vector_width_char);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT:		bTooSmall = SET_VAR(device->native_vector_width_short);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_INT:			bTooSmall = SET_VAR(device->native_vector_width_int);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_LONG:		bTooSmall = SET_VAR(device->native_vector_width_long);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_FLOAT:		bTooSmall = SET_VAR(device->native_vector_width_float);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE:		bTooSmall = SET_VAR(device->native_vector_width_double);	break;
-		case CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF:		bTooSmall = SET_VAR(device->native_vector_width_half);	break;
-		case CL_DEVICE_MAX_CLOCK_FREQUENCY:				bTooSmall = SET_VAR(device->max_clock_frequency);	break;
-		case CL_DEVICE_ADDRESS_BITS:					bTooSmall = SET_VAR(device->addressbits);	break;
-		case CL_DEVICE_MAX_MEM_ALLOC_SIZE:				bTooSmall = SET_VAR(device->freememsize);	break;
-		case CL_DEVICE_IMAGE_SUPPORT:					bTooSmall = SET_VAR(cl_bool_true);	break;
+		case CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF:	bTooSmall = SET_VAR(device->preferred_vector_width_half);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR:	bTooSmall = SET_VAR(device->native_vector_width_char);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT:	bTooSmall = SET_VAR(device->native_vector_width_short);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_INT:		bTooSmall = SET_VAR(device->native_vector_width_int);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_LONG:	bTooSmall = SET_VAR(device->native_vector_width_long);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_FLOAT:	bTooSmall = SET_VAR(device->native_vector_width_float);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE:	bTooSmall = SET_VAR(device->native_vector_width_double);	break;
+		case CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF:	bTooSmall = SET_VAR(device->native_vector_width_half);	break;
+		case CL_DEVICE_MAX_CLOCK_FREQUENCY:		bTooSmall = SET_VAR(device->max_clock_frequency);	break;
+		case CL_DEVICE_ADDRESS_BITS:			bTooSmall = SET_VAR(device->addressbits);	break;
+		case CL_DEVICE_MAX_MEM_ALLOC_SIZE:		bTooSmall = SET_VAR(device->freememsize);	break;
+		case CL_DEVICE_IMAGE_SUPPORT:			bTooSmall = SET_VAR(cl_bool_true);	break;
 
-		case CL_DEVICE_MAX_READ_IMAGE_ARGS:				bTooSmall = SET_VAR(device->max_read_image_args);	break;
-		case CL_DEVICE_MAX_WRITE_IMAGE_ARGS:			bTooSmall = SET_VAR(device->max_write_image_args);	break;
-		case CL_DEVICE_IMAGE2D_MAX_WIDTH:				bTooSmall = SET_VAR(device->image2d_max_width);	break;
-		case CL_DEVICE_IMAGE2D_MAX_HEIGHT:				bTooSmall = SET_VAR(device->image2d_max_height);	break;
-		case CL_DEVICE_IMAGE3D_MAX_WIDTH:				bTooSmall = SET_VAR(device->image3d_max_width);	break;
-		case CL_DEVICE_IMAGE3D_MAX_HEIGHT:				bTooSmall = SET_VAR(device->image3d_max_height);	break;
-		case CL_DEVICE_IMAGE3D_MAX_DEPTH:				bTooSmall = SET_VAR(device->image3d_max_depth);	break;
-		case CL_DEVICE_MAX_SAMPLERS:					bTooSmall = SET_VAR(device->max_samplers);	break;
-		case CL_DEVICE_IMAGE_MAX_ARRAY_SIZE:			bTooSmall = SET_VAR(device->image_max_array_size);	break;
-		case CL_DEVICE_IMAGE_MAX_BUFFER_SIZE:			bTooSmall = SET_VAR(device->image_max_buffer_size);	break;
+		case CL_DEVICE_MAX_READ_IMAGE_ARGS:		bTooSmall = SET_VAR(device->max_read_image_args);	break;
+		case CL_DEVICE_MAX_WRITE_IMAGE_ARGS:		bTooSmall = SET_VAR(device->max_write_image_args);	break;
+		case CL_DEVICE_IMAGE2D_MAX_WIDTH:		bTooSmall = SET_VAR(device->image2d_max_width);	break;
+		case CL_DEVICE_IMAGE2D_MAX_HEIGHT:		bTooSmall = SET_VAR(device->image2d_max_height);	break;
+		case CL_DEVICE_IMAGE3D_MAX_WIDTH:		bTooSmall = SET_VAR(device->image3d_max_width);	break;
+		case CL_DEVICE_IMAGE3D_MAX_HEIGHT:		bTooSmall = SET_VAR(device->image3d_max_height);	break;
+		case CL_DEVICE_IMAGE3D_MAX_DEPTH:		bTooSmall = SET_VAR(device->image3d_max_depth);	break;
+		case CL_DEVICE_MAX_SAMPLERS:			bTooSmall = SET_VAR(device->max_samplers);	break;
+		case CL_DEVICE_IMAGE_MAX_ARRAY_SIZE:		bTooSmall = SET_VAR(device->image_max_array_size);	break;
+		case CL_DEVICE_IMAGE_MAX_BUFFER_SIZE:		bTooSmall = SET_VAR(device->image_max_buffer_size);	break;
 
-		case CL_DEVICE_MAX_PARAMETER_SIZE:				bTooSmall = SET_VAR(device->max_parameter_size);	break;
-		case CL_DEVICE_MEM_BASE_ADDR_ALIGN:				bTooSmall = SET_VAR(device->mem_base_addr_align);	break;
-		case CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE:		bTooSmall = SET_VAR(device->mem_base_addr_align);	break;
-		case CL_DEVICE_SINGLE_FP_CONFIG:				bTooSmall = SET_VAR(device->fp_config);	break;
-		case CL_DEVICE_DOUBLE_FP_CONFIG:				bTooSmall = SET_VAR(device->fp_config);	break;
-		case CL_DEVICE_GLOBAL_MEM_CACHE_TYPE:			bTooSmall = SET_VAR(device->mem_cache_type);	break;
-		case CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE:		bTooSmall = SET_VAR(device->mem_cacheline_size);	break;
-		case CL_DEVICE_GLOBAL_MEM_CACHE_SIZE:			bTooSmall = SET_VAR(device->mem_cache_size);	break;
-		case CL_DEVICE_GLOBAL_MEM_SIZE:					bTooSmall = SET_VAR(device->memsize);	break;
-		case CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE:		bTooSmall = SET_VAR(device->max_constant_buffer_size);	break;
-		case CL_DEVICE_MAX_CONSTANT_ARGS:				bTooSmall = SET_VAR(device->max_constant_args);	break;
-		case CL_DEVICE_LOCAL_MEM_TYPE:					bTooSmall = SET_VAR(device->local_mem_type);	break;
-		case CL_DEVICE_LOCAL_MEM_SIZE:					bTooSmall = SET_VAR(device->local_mem_size);	break;
-		case CL_DEVICE_ERROR_CORRECTION_SUPPORT:		bTooSmall = SET_VAR(cl_bool_false);	break;
-		case CL_DEVICE_HOST_UNIFIED_MEMORY:				bTooSmall = SET_VAR(cl_bool_true);	break;
-		case CL_DEVICE_PROFILING_TIMER_RESOLUTION:		bTooSmall = SET_VAR(device->timer_resolution);	break;
-		case CL_DEVICE_ENDIAN_LITTLE:					bTooSmall = SET_VAR(device->endian_little);	break;
+		case CL_DEVICE_MAX_PARAMETER_SIZE:		bTooSmall = SET_VAR(device->max_parameter_size);	break;
+		case CL_DEVICE_MEM_BASE_ADDR_ALIGN:		bTooSmall = SET_VAR(device->mem_base_addr_align);	break;
+		case CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE:	bTooSmall = SET_VAR(device->mem_base_addr_align);	break;
+		case CL_DEVICE_SINGLE_FP_CONFIG:		bTooSmall = SET_VAR(device->fp_config);	break;
+		case CL_DEVICE_DOUBLE_FP_CONFIG:		bTooSmall = SET_VAR(device->fp_config);	break;
+		case CL_DEVICE_GLOBAL_MEM_CACHE_TYPE:		bTooSmall = SET_VAR(device->mem_cache_type);	break;
+		case CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE:	bTooSmall = SET_VAR(device->mem_cacheline_size);	break;
+		case CL_DEVICE_GLOBAL_MEM_CACHE_SIZE:		bTooSmall = SET_VAR(device->mem_cache_size);	break;
+		case CL_DEVICE_GLOBAL_MEM_SIZE:			bTooSmall = SET_VAR(device->memsize);	break;
+		case CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE:	bTooSmall = SET_VAR(device->max_constant_buffer_size);	break;
+		case CL_DEVICE_MAX_CONSTANT_ARGS:		bTooSmall = SET_VAR(device->max_constant_args);	break;
+		case CL_DEVICE_LOCAL_MEM_TYPE:			bTooSmall = SET_VAR(device->local_mem_type);	break;
+		case CL_DEVICE_LOCAL_MEM_SIZE:			bTooSmall = SET_VAR(device->local_mem_size);	break;
+		case CL_DEVICE_ERROR_CORRECTION_SUPPORT:	bTooSmall = SET_VAR(cl_bool_false);	break;
+		case CL_DEVICE_HOST_UNIFIED_MEMORY:		bTooSmall = SET_VAR(cl_bool_true);	break;
+		case CL_DEVICE_PROFILING_TIMER_RESOLUTION:	bTooSmall = SET_VAR(device->timer_resolution);	break;
+		case CL_DEVICE_ENDIAN_LITTLE:			bTooSmall = SET_VAR(device->endian_little);	break;
 		case CL_DEVICE_AVAILABLE:
 		case CL_DEVICE_LINKER_AVAILABLE:
-		case CL_DEVICE_COMPILER_AVAILABLE:				bTooSmall = SET_VAR(cl_bool_true);	break;
-		case CL_DEVICE_EXECUTION_CAPABILITIES:			bTooSmall = SET_VAR(device->exec_capabilities);	break;
-		case CL_DEVICE_QUEUE_PROPERTIES:				bTooSmall = SET_VAR(device->command_queue_properties);	break;
-		case CL_DEVICE_PLATFORM:						bTooSmall = SET_VAR(FreeOCL::platform);	break;
-		case CL_DEVICE_NAME:							bTooSmall = SET_STRING(device->name.c_str());	break;
-		case CL_DEVICE_VENDOR:							bTooSmall = SET_STRING(device->vendor.c_str());	break;
-		case CL_DRIVER_VERSION:							bTooSmall = SET_STRING(device->driver_version);	break;
-		case CL_DEVICE_PROFILE:							bTooSmall = SET_STRING(device->device_profile);	break;
-		case CL_DEVICE_VERSION:							bTooSmall = SET_STRING(device->version.c_str());	break;
-		case CL_DEVICE_OPENCL_C_VERSION:				bTooSmall = SET_STRING(device->opencl_c_version);	break;
-		case CL_DEVICE_EXTENSIONS:						bTooSmall = SET_STRING(device->extensions);	break;
-		case CL_DEVICE_PRINTF_BUFFER_SIZE:				bTooSmall = SET_VAR(device->printf_buffer_size);	break;
-		case CL_DEVICE_PREFERRED_INTEROP_USER_SYNC:		bTooSmall = SET_VAR(cl_bool_false);	break;
+		case CL_DEVICE_COMPILER_AVAILABLE:		bTooSmall = SET_VAR(cl_bool_true);	break;
+		case CL_DEVICE_EXECUTION_CAPABILITIES:		bTooSmall = SET_VAR(device->exec_capabilities);	break;
+		case CL_DEVICE_QUEUE_PROPERTIES:		bTooSmall = SET_VAR(device->command_queue_properties);	break;
+		case CL_DEVICE_PLATFORM:			bTooSmall = SET_VAR(FreeOCL::platform);	break;
+		case CL_DEVICE_NAME:				bTooSmall = SET_STRING(device->name.c_str());	break;
+		case CL_DEVICE_VENDOR:				bTooSmall = SET_STRING(device->vendor.c_str());	break;
+		case CL_DRIVER_VERSION:				bTooSmall = SET_STRING(device->driver_version);	break;
+		case CL_DEVICE_PROFILE:				bTooSmall = SET_STRING(device->device_profile);	break;
+		case CL_DEVICE_VERSION:				bTooSmall = SET_STRING(device->version.c_str());	break;
+		case CL_DEVICE_OPENCL_C_VERSION:		bTooSmall = SET_STRING(device->opencl_c_version);	break;
+		case CL_DEVICE_EXTENSIONS:			bTooSmall = SET_STRING(device->extensions);	break;
+		case CL_DEVICE_PRINTF_BUFFER_SIZE:		bTooSmall = SET_VAR(device->printf_buffer_size);	break;
+		case CL_DEVICE_PREFERRED_INTEROP_USER_SYNC:	bTooSmall = SET_VAR(cl_bool_false);	break;
 		case CL_DEVICE_PARENT_DEVICE:
 			{
 				cl_device_id dev = NULL;
 				bTooSmall = SET_VAR(dev);
 			}
 			break;
-		case CL_DEVICE_PARTITION_MAX_SUB_DEVICES:		bTooSmall = SET_VAR(device->max_sub_devices);	break;
+		case CL_DEVICE_PARTITION_MAX_SUB_DEVICES:	bTooSmall = SET_VAR(device->max_sub_devices);	break;
 		case CL_DEVICE_PARTITION_PROPERTIES:
 			{
 				cl_device_partition_property prop = 0;
@@ -163,10 +163,10 @@ extern "C"
 	}
 
 	cl_int clGetDeviceIDsFCL (cl_platform_id platform,
-							  cl_device_type device_type,
-							  cl_uint num_entries,
-							  cl_device_id *devices,
-							  cl_uint *num_devices)
+                                  cl_device_type device_type,
+                                  cl_uint num_entries,
+                                  cl_device_id *devices,
+                                  cl_uint *num_devices)
 	{
 		MSG(clGetDeviceIDsFCL);
 		if (platform != FreeOCL::platform)
@@ -198,10 +198,10 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clCreateSubDevicesFCL(cl_device_id                         in_device,
-														  const cl_device_partition_property * properties,
-														  cl_uint                              num_devices,
-														  cl_device_id *                       out_devices,
-														  cl_uint *                            num_devices_ret) CL_API_SUFFIX__VERSION_1_2
+                                                              const cl_device_partition_property * properties,
+                                                              cl_uint                              num_devices,
+                                                              cl_device_id *                       out_devices,
+                                                              cl_uint *                            num_devices_ret) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clCreateSubDevicesFCL);
 		if (in_device != FreeOCL::device)
@@ -294,15 +294,15 @@ _cl_device_id::_cl_device_id() :
 	device_profile("FULL_PROFILE"),
 	opencl_c_version("OpenCL C 1.2"),
 	extensions("cl_khr_icd" SEP
-			   "cl_khr_global_int32_base_atomics" SEP
-			   "cl_khr_global_int32_extended_atomics" SEP
-			   "cl_khr_local_int32_base_atomics" SEP
-			   "cl_khr_local_int32_extended_atomics" SEP
-			   "cl_khr_byte_addressable_store" SEP
-			   "cl_khr_fp64" SEP
-			   "cl_khr_int64_base_atomics" SEP
-			   "cl_khr_int64_extended_atomics" SEP
-			   "cl_freeocl_debug"),
+                   "cl_khr_global_int32_base_atomics" SEP
+                   "cl_khr_global_int32_extended_atomics" SEP
+                   "cl_khr_local_int32_base_atomics" SEP
+                   "cl_khr_local_int32_extended_atomics" SEP
+                   "cl_khr_byte_addressable_store" SEP
+                   "cl_khr_fp64" SEP
+                   "cl_khr_int64_base_atomics" SEP
+                   "cl_khr_int64_extended_atomics" SEP
+                   "cl_freeocl_debug"),
 	exec_capabilities(CL_EXEC_KERNEL | CL_EXEC_NATIVE_KERNEL),
 	preferred_vector_width_char(16),
 	preferred_vector_width_short(8),

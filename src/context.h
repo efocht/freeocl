@@ -30,9 +30,9 @@ struct _cl_context : public FreeOCL::icd_table, public FreeOCL::ref_counter, pub
 	std::vector<cl_device_id>	devices;
 	std::vector<cl_context_properties>	properties;
 	void (CL_CALLBACK *pfn_notify)(const char *errinfo,
-								   const void *private_info,
-								   size_t cb,
-								   void *user_data);
+				       const void *private_info,
+				       size_t cb,
+				       void *user_data);
 	void *user_data;
 
 	FreeOCL::set<FreeOCL::context_resource*> resources;

@@ -86,14 +86,14 @@ namespace
 #define CLK_NORMALIZED_COORDS_FALSE		0x00000000U
 #define CLK_NORMALIZED_COORDS_TRUE		0x01000000U
 
-#define CLK_ADDRESS_NONE				0x00000000U
+#define CLK_ADDRESS_NONE			0x00000000U
 #define CLK_ADDRESS_CLAMP_TO_EDGE		0x00000001U
-#define CLK_ADDRESS_REPEAT				0x00000002U
-#define CLK_ADDRESS_CLAMP				0x00000003U
+#define CLK_ADDRESS_REPEAT			0x00000002U
+#define CLK_ADDRESS_CLAMP			0x00000003U
 #define CLK_ADDRESS_MIRRORED_REPEAT		0x00000004U
 
-#define CLK_FILTER_NEAREST				0x00000000U
-#define CLK_FILTER_LINEAR				0x00010000U
+#define CLK_FILTER_NEAREST			0x00000000U
+#define CLK_FILTER_LINEAR			0x00010000U
 
 #define SET_STRING(X)	FreeOCL::copy_memory_within_limits(X, strlen(X) + 1, param_value_size, param_value, param_value_size_ret)
 #define SET_VAR(X)	FreeOCL::copy_memory_within_limits(&(X), sizeof(X), param_value_size, param_value, param_value_size_ret)
@@ -102,15 +102,15 @@ namespace
 extern "C"
 {
 	cl_int clEnqueueNativeKernelFCL (cl_command_queue command_queue,
-								  void (*user_func)(void *),
-								  void *args,
-								  size_t cb_args,
-								  cl_uint num_mem_objects,
-								  const cl_mem *mem_list,
-								  const void **args_mem_loc,
-								  cl_uint num_events_in_wait_list,
-								  const cl_event *event_wait_list,
-								  cl_event *event)
+                                         void (*user_func)(void *),
+                                         void *args,
+                                         size_t cb_args,
+                                         cl_uint num_mem_objects,
+                                         const cl_mem *mem_list,
+                                         const void **args_mem_loc,
+                                         cl_uint num_events_in_wait_list,
+                                         const cl_event *event_wait_list,
+                                         cl_event *event)
 	{
 		MSG(clEnqueueNativeKernelFCL);
 		if (user_func == NULL
@@ -168,8 +168,8 @@ extern "C"
 	}
 
 	cl_kernel clCreateKernelFCL (cl_program program,
-							  const char *kernel_name,
-							  cl_int *errcode_ret)
+                                     const char *kernel_name,
+                                     cl_int *errcode_ret)
 	{
 		MSG(clCreateKernelFCL);
 
@@ -243,9 +243,9 @@ extern "C"
 	}
 
 	cl_int clCreateKernelsInProgramFCL (cl_program program,
-									 cl_uint num_kernels,
-									 cl_kernel *kernels,
-									 cl_uint *num_kernels_ret)
+					    cl_uint num_kernels,
+					    cl_kernel *kernels,
+					    cl_uint *num_kernels_ret)
 	{
 		MSG(clCreateKernelsInProgramFCL);
 
@@ -312,9 +312,9 @@ extern "C"
 	}
 
 	cl_int clSetKernelArgFCL (cl_kernel kernel,
-						   cl_uint arg_index,
-						   size_t arg_size,
-						   const void *arg_value)
+				  cl_uint arg_index,
+				  size_t arg_size,
+				  const void *arg_value)
 	{
 		MSG(clSetKernelArgFCL);
 		FreeOCL::unlocker unlock;
@@ -371,10 +371,10 @@ extern "C"
 				switch(sampler->addressing_mode)
 				{
 				case CL_ADDRESS_MIRRORED_REPEAT:	sampler_value |= CLK_ADDRESS_MIRRORED_REPEAT;	break;
-				case CL_ADDRESS_NONE:				sampler_value |= CLK_ADDRESS_NONE;	break;
+				case CL_ADDRESS_NONE:			sampler_value |= CLK_ADDRESS_NONE;	break;
 				case CL_ADDRESS_CLAMP_TO_EDGE:		sampler_value |= CLK_ADDRESS_CLAMP_TO_EDGE;	break;
-				case CL_ADDRESS_CLAMP:				sampler_value |= CLK_ADDRESS_CLAMP;	break;
-				case CL_ADDRESS_REPEAT:				sampler_value |= CLK_ADDRESS_REPEAT;	break;
+				case CL_ADDRESS_CLAMP:			sampler_value |= CLK_ADDRESS_CLAMP;	break;
+				case CL_ADDRESS_REPEAT:			sampler_value |= CLK_ADDRESS_REPEAT;	break;
 				}
 
 				switch(sampler->filter_mode)
@@ -554,10 +554,10 @@ extern "C"
 	}
 
 	cl_int clGetKernelInfoFCL (cl_kernel kernel,
-							cl_kernel_info param_name,
-							size_t param_value_size,
-							void *param_value,
-							size_t *param_value_size_ret)
+				   cl_kernel_info param_name,
+				   size_t param_value_size,
+				   void *param_value,
+				   size_t *param_value_size_ret)
 	{
 		MSG(clGetKernelInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -577,8 +577,8 @@ extern "C"
 			}
 			break;
 		case CL_KERNEL_REFERENCE_COUNT:	bTooSmall = SET_VAR(kernel->get_ref_count());	break;
-		case CL_KERNEL_CONTEXT:			bTooSmall = SET_VAR(kernel->program->context);	break;
-		case CL_KERNEL_PROGRAM:			bTooSmall = SET_VAR(kernel->program);	break;
+		case CL_KERNEL_CONTEXT:		bTooSmall = SET_VAR(kernel->program->context);	break;
+		case CL_KERNEL_PROGRAM:		bTooSmall = SET_VAR(kernel->program);	break;
 		case CL_KERNEL_ATTRIBUTES:
 			//! \todo implement kernel attributes
 			bTooSmall = SET_VAR("");
@@ -593,11 +593,11 @@ extern "C"
 	}
 
 	cl_int clGetKernelWorkGroupInfoFCL (cl_kernel kernel,
-									 cl_device_id device,
-									 cl_kernel_work_group_info param_name,
-									 size_t param_value_size,
-									 void *param_value,
-									 size_t *param_value_size_ret)
+					    cl_device_id device,
+					    cl_kernel_work_group_info param_name,
+					    size_t param_value_size,
+					    void *param_value,
+					    size_t *param_value_size_ret)
 	{
 		MSG(clGetKernelWorkGroupInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -655,14 +655,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueNDRangeKernelFCL (cl_command_queue command_queue,
-								   cl_kernel kernel,
-								   cl_uint work_dim,
-								   const size_t *global_work_offset,
-								   const size_t *global_work_size,
-								   const size_t *local_work_size,
-								   cl_uint num_events_in_wait_list,
-								   const cl_event *event_wait_list,
-								   cl_event *event)
+					  cl_kernel kernel,
+					  cl_uint work_dim,
+					  const size_t *global_work_offset,
+					  const size_t *global_work_size,
+					  const size_t *local_work_size,
+					  cl_uint num_events_in_wait_list,
+					  const cl_event *event_wait_list,
+					  cl_event *event)
 	{
 		MSG(clEnqueueNDRangeKernelFCL);
 
@@ -735,31 +735,31 @@ extern "C"
 	}
 
 	cl_int clEnqueueTaskFCL (cl_command_queue command_queue,
-						  cl_kernel kernel,
-						  cl_uint num_events_in_wait_list,
-						  const cl_event *event_wait_list,
-						  cl_event *event)
+				 cl_kernel kernel,
+				 cl_uint num_events_in_wait_list,
+				 const cl_event *event_wait_list,
+				 cl_event *event)
 	{
 		MSG(clEnqueueTaskFCL);
 		const size_t global_work_size = 1;
 		const size_t local_work_size = 1;
 		return clEnqueueNDRangeKernelFCL(command_queue,
-										 kernel,
-										 1,
-										 NULL,
-										 &global_work_size,
-										 &local_work_size,
-										 num_events_in_wait_list,
-										 event_wait_list,
-										 event);
+						 kernel,
+						 1,
+						 NULL,
+						 &global_work_size,
+						 &local_work_size,
+						 num_events_in_wait_list,
+						 event_wait_list,
+						 event);
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clGetKernelArgInfoFCL(cl_kernel       kernel,
-														  cl_uint         arg_indx,
-														  cl_kernel_arg_info  param_name,
-														  size_t          param_value_size,
-														  void *          param_value,
-														  size_t *        param_value_size_ret) CL_API_SUFFIX__VERSION_1_2
+							      cl_uint         arg_indx,
+							      cl_kernel_arg_info  param_name,
+							      size_t          param_value_size,
+							      void *          param_value,
+							      size_t *        param_value_size_ret) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clGetKernelArgInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -792,9 +792,9 @@ extern "C"
 			}
 			break;
         case CL_KERNEL_ARG_ACCESS_QUALIFIER:	bTooSmall = SET_VAR(kernel->args[arg_indx].access_qualifier);	break;
-        case CL_KERNEL_ARG_TYPE_NAME:			bTooSmall = SET_STRING(kernel->args[arg_indx].type_name.c_str());	break;
-        case CL_KERNEL_ARG_NAME:				bTooSmall = SET_STRING(kernel->args[arg_indx].name.c_str());	break;
-        case CL_KERNEL_ARG_TYPE_QUALIFIER:		bTooSmall = SET_VAR(kernel->args[arg_indx].qualifier);	break;
+        case CL_KERNEL_ARG_TYPE_NAME:		bTooSmall = SET_STRING(kernel->args[arg_indx].type_name.c_str());	break;
+        case CL_KERNEL_ARG_NAME:		bTooSmall = SET_STRING(kernel->args[arg_indx].name.c_str());	break;
+        case CL_KERNEL_ARG_TYPE_QUALIFIER:	bTooSmall = SET_VAR(kernel->args[arg_indx].qualifier);	break;
 		default:
 			return CL_INVALID_VALUE;
 		}

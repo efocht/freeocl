@@ -31,10 +31,10 @@
 extern "C"
 {
 	cl_mem clCreateBufferFCL (cl_context context,
-						   cl_mem_flags flags,
-						   size_t size,
-						   void *host_ptr,
-						   cl_int *errcode_ret)
+                                  cl_mem_flags flags,
+                                  size_t size,
+                                  void *host_ptr,
+                                  cl_int *errcode_ret)
 	{
 		MSG(clCreateBufferFCL);
 		if (size == 0)
@@ -107,10 +107,10 @@ extern "C"
 	}
 
 	cl_mem clCreateSubBufferFCL (cl_mem buffer,
-							  cl_mem_flags flags,
-							  cl_buffer_create_type buffer_create_type,
-							  const void *buffer_create_info,
-							  cl_int *errcode_ret)
+                                     cl_mem_flags flags,
+                                     cl_buffer_create_type buffer_create_type,
+                                     const void *buffer_create_info,
+                                     cl_int *errcode_ret)
 	{
 		MSG(clCreateSubBufferFCL);
 		FreeOCL::unlocker unlock;
@@ -216,9 +216,9 @@ extern "C"
 	}
 
 	cl_int clSetMemObjectDestructorCallbackFCL (cl_mem memobj,
-											 void (CL_CALLBACK *pfn_notify)(cl_mem memobj,
-																			void *user_data),
-											 void *user_data)
+                                                    void (CL_CALLBACK *pfn_notify)(cl_mem memobj,
+                                                                                   void *user_data),
+                                                    void *user_data)
 	{
 		MSG(clSetMemObjectDestructorCallbackFCL);
 		if (pfn_notify)
@@ -235,10 +235,10 @@ extern "C"
 	}
 
 	cl_int clGetMemObjectInfoFCL (cl_mem memobj,
-							   cl_mem_info param_name,
-							   size_t param_value_size,
-							   void *param_value,
-							   size_t *param_value_size_ret)
+                                      cl_mem_info param_name,
+                                      size_t param_value_size,
+                                      void *param_value,
+                                      size_t *param_value_size_ret)
 	{
 		MSG(clGetMemObjectInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -249,10 +249,10 @@ extern "C"
 		bool bTooSmall = false;
 		switch(param_name)
 		{
-		case CL_MEM_TYPE:					bTooSmall = SET_VAR(memobj->mem_type);	break;
-		case CL_MEM_FLAGS:					bTooSmall = SET_VAR(memobj->flags);	break;
-		case CL_MEM_SIZE:					bTooSmall = SET_VAR(memobj->size);	break;
-		case CL_MEM_HOST_PTR:				bTooSmall = SET_VAR(memobj->host_ptr);	break;
+		case CL_MEM_TYPE:			bTooSmall = SET_VAR(memobj->mem_type);	break;
+		case CL_MEM_FLAGS:			bTooSmall = SET_VAR(memobj->flags);	break;
+		case CL_MEM_SIZE:			bTooSmall = SET_VAR(memobj->size);	break;
+		case CL_MEM_HOST_PTR:			bTooSmall = SET_VAR(memobj->host_ptr);	break;
 		case CL_MEM_MAP_COUNT:
 			{
 				cl_uint n = memobj->mapped.size();
@@ -260,9 +260,9 @@ extern "C"
 			}
 			break;
 		case CL_MEM_REFERENCE_COUNT:		bTooSmall = SET_VAR(memobj->get_ref_count());	break;
-		case CL_MEM_CONTEXT:				bTooSmall = SET_VAR(memobj->context);	break;
+		case CL_MEM_CONTEXT:			bTooSmall = SET_VAR(memobj->context);	break;
 		case CL_MEM_ASSOCIATED_MEMOBJECT:	bTooSmall = SET_VAR(memobj->parent);	break;
-		case CL_MEM_OFFSET:					bTooSmall = SET_VAR(memobj->offset);	break;
+		case CL_MEM_OFFSET:			bTooSmall = SET_VAR(memobj->offset);	break;
 		default:
 			return CL_INVALID_VALUE;
 		}
@@ -274,14 +274,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueReadBufferFCL (cl_command_queue command_queue,
-								cl_mem buffer,
-								cl_bool blocking_read,
-								size_t offset,
-								size_t cb,
-								void *ptr,
-								cl_uint num_events_in_wait_list,
-								const cl_event *event_wait_list,
-								cl_event *event)
+                                       cl_mem buffer,
+                                       cl_bool blocking_read,
+                                       size_t offset,
+                                       size_t cb,
+                                       void *ptr,
+                                       cl_uint num_events_in_wait_list,
+                                       const cl_event *event_wait_list,
+                                       cl_event *event)
 	{
 		MSG(clEnqueueReadBufferFCL);
 		FreeOCL::unlocker unlock;
@@ -368,14 +368,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueWriteBufferFCL (cl_command_queue command_queue,
-								 cl_mem buffer,
-								 cl_bool blocking_write,
-								 size_t offset,
-								 size_t cb,
-								 const void *ptr,
-								 cl_uint num_events_in_wait_list,
-								 const cl_event *event_wait_list,
-								 cl_event *event)
+                                        cl_mem buffer,
+                                        cl_bool blocking_write,
+                                        size_t offset,
+                                        size_t cb,
+                                        const void *ptr,
+                                        cl_uint num_events_in_wait_list,
+                                        const cl_event *event_wait_list,
+                                        cl_event *event)
 	{
 		MSG(clEnqueueWriteBufferFCL);
 		FreeOCL::unlocker unlock;
@@ -462,14 +462,14 @@ extern "C"
 	}
 
 	cl_int clEnqueueCopyBufferFCL (cl_command_queue command_queue,
-								cl_mem src_buffer,
-								cl_mem dst_buffer,
-								size_t src_offset,
-								size_t dst_offset,
-								size_t cb,
-								cl_uint num_events_in_wait_list,
-								const cl_event *event_wait_list,
-								cl_event *event)
+                                       cl_mem src_buffer,
+                                       cl_mem dst_buffer,
+                                       size_t src_offset,
+                                       size_t dst_offset,
+                                       size_t cb,
+                                       cl_uint num_events_in_wait_list,
+                                       const cl_event *event_wait_list,
+                                       cl_event *event)
 	{
 		MSG(clEnqueueCopyBufferFCL);
 		FreeOCL::unlocker unlock;
@@ -527,15 +527,15 @@ extern "C"
 	}
 
 	void * clEnqueueMapBufferFCL (cl_command_queue command_queue,
-							   cl_mem buffer,
-							   cl_bool blocking_map,
-							   cl_map_flags map_flags,
-							   size_t offset,
-							   size_t cb,
-							   cl_uint num_events_in_wait_list,
-							   const cl_event *event_wait_list,
-							   cl_event *event,
-							   cl_int *errcode_ret)
+                                      cl_mem buffer,
+                                      cl_bool blocking_map,
+                                      cl_map_flags map_flags,
+                                      size_t offset,
+                                      size_t cb,
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event *event_wait_list,
+                                      cl_event *event,
+                                      cl_int *errcode_ret)
 	{
 		MSG(clEnqueueMapBufferFCL);
 		if (map_flags & ~(CL_MAP_READ | CL_MAP_WRITE | CL_MAP_WRITE_INVALIDATE_REGION))
@@ -621,11 +621,11 @@ extern "C"
 	}
 
 	cl_int clEnqueueUnmapMemObjectFCL (cl_command_queue command_queue,
-									cl_mem memobj,
-									void *mapped_ptr,
-									cl_uint num_events_in_wait_list,
-									const cl_event *event_wait_list,
-									cl_event *event)
+                                           cl_mem memobj,
+                                           void *mapped_ptr,
+                                           cl_uint num_events_in_wait_list,
+                                           const cl_event *event_wait_list,
+                                           cl_event *event)
 	{
 		MSG(clEnqueueUnmapMemObjectFCL);
 		FreeOCL::unlocker unlock;
@@ -663,18 +663,18 @@ extern "C"
 
 	CL_API_ENTRY cl_int CL_API_CALL
 	clEnqueueCopyBufferRectFCL(cl_command_queue command_queue,
-							cl_mem              src_buffer,
-							cl_mem              dst_buffer,
-							const size_t *      src_origin,
-							const size_t *      dst_origin,
-							const size_t *      region,
-							size_t              src_row_pitch,
-							size_t              src_slice_pitch,
-							size_t              dst_row_pitch,
-							size_t              dst_slice_pitch,
-							cl_uint             num_events_in_wait_list,
-							const cl_event *    event_wait_list,
-							cl_event *          event) CL_API_SUFFIX__VERSION_1_1
+                                   cl_mem              src_buffer,
+                                   cl_mem              dst_buffer,
+                                   const size_t *      src_origin,
+                                   const size_t *      dst_origin,
+                                   const size_t *      region,
+                                   size_t              src_row_pitch,
+                                   size_t              src_slice_pitch,
+                                   size_t              dst_row_pitch,
+                                   size_t              dst_slice_pitch,
+                                   cl_uint             num_events_in_wait_list,
+                                   const cl_event *    event_wait_list,
+                                   cl_event *          event) CL_API_SUFFIX__VERSION_1_1
 	{
 		MSG(clEnqueueCopyBufferRectFCL);
 		FreeOCL::unlocker unlock;
@@ -763,19 +763,19 @@ extern "C"
 
 	CL_API_ENTRY cl_int CL_API_CALL
 	clEnqueueWriteBufferRectFCL(cl_command_queue command_queue,
-							 cl_mem              buffer,
-							 cl_bool             blocking_write,
-							 const size_t *      buffer_origin,
-							 const size_t *      host_origin,
-							 const size_t *      region,
-							 size_t              buffer_row_pitch,
-							 size_t              buffer_slice_pitch,
-							 size_t              host_row_pitch,
-							 size_t              host_slice_pitch,
-							 const void *        ptr,
-							 cl_uint             num_events_in_wait_list,
-							 const cl_event *    event_wait_list,
-							 cl_event *          event) CL_API_SUFFIX__VERSION_1_1
+                                    cl_mem              buffer,
+                                    cl_bool             blocking_write,
+                                    const size_t *      buffer_origin,
+                                    const size_t *      host_origin,
+                                    const size_t *      region,
+                                    size_t              buffer_row_pitch,
+                                    size_t              buffer_slice_pitch,
+                                    size_t              host_row_pitch,
+                                    size_t              host_slice_pitch,
+                                    const void *        ptr,
+                                    cl_uint             num_events_in_wait_list,
+                                    const cl_event *    event_wait_list,
+                                    cl_event *          event) CL_API_SUFFIX__VERSION_1_1
 	{
 		MSG(clEnqueueWriteBufferRectFCL);
 		FreeOCL::unlocker unlock;
@@ -860,19 +860,19 @@ extern "C"
 
 	CL_API_ENTRY cl_int CL_API_CALL
 	clEnqueueReadBufferRectFCL(cl_command_queue command_queue,
-							cl_mem              buffer,
-							cl_bool             blocking_read,
-							const size_t *      buffer_origin,
-							const size_t *      host_origin,
-							const size_t *      region,
-							size_t              buffer_row_pitch,
-							size_t              buffer_slice_pitch,
-							size_t              host_row_pitch,
-							size_t              host_slice_pitch,
-							void *              ptr,
-							cl_uint             num_events_in_wait_list,
-							const cl_event *    event_wait_list,
-							cl_event *          event) CL_API_SUFFIX__VERSION_1_1
+                                   cl_mem              buffer,
+                                   cl_bool             blocking_read,
+                                   const size_t *      buffer_origin,
+                                   const size_t *      host_origin,
+                                   const size_t *      region,
+                                   size_t              buffer_row_pitch,
+                                   size_t              buffer_slice_pitch,
+                                   size_t              host_row_pitch,
+                                   size_t              host_slice_pitch,
+                                   void *              ptr,
+                                   cl_uint             num_events_in_wait_list,
+                                   const cl_event *    event_wait_list,
+                                   cl_event *          event) CL_API_SUFFIX__VERSION_1_1
 	{
 		MSG(clEnqueueReadBufferRectFCL);
 		FreeOCL::unlocker unlock;
@@ -904,8 +904,8 @@ extern "C"
 		unlock.handle(buffer);
 
 		if (buffer->size < buffer_origin[0] + region[0]
-							+ (buffer_origin[1] + region[1]) * buffer_row_pitch
-							+ (buffer_origin[2] + region[2]) * buffer_slice_pitch)
+                    + (buffer_origin[1] + region[1]) * buffer_row_pitch
+                    + (buffer_origin[2] + region[2]) * buffer_slice_pitch)
 			return CL_INVALID_VALUE;
 
 		if (blocking_read == CL_TRUE)
@@ -956,14 +956,14 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clEnqueueFillBufferFCL(cl_command_queue   command_queue,
-														   cl_mem             buffer,
-														   const void *       pattern,
-														   size_t             pattern_size,
-														   size_t             offset,
-														   size_t             size,
-														   cl_uint            num_events_in_wait_list,
-														   const cl_event *   event_wait_list,
-														   cl_event *         event) CL_API_SUFFIX__VERSION_1_2
+							       cl_mem             buffer,
+							       const void *       pattern,
+							       size_t             pattern_size,
+							       size_t             offset,
+							       size_t             size,
+							       cl_uint            num_events_in_wait_list,
+							       const cl_event *   event_wait_list,
+							       cl_event *         event) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clEnqueueFillBufferFCL);
 
@@ -1019,12 +1019,12 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clEnqueueMigrateMemObjectsFCL(cl_command_queue       command_queue,
-																  cl_uint                num_mem_objects,
-																  const cl_mem *         mem_objects,
-																  cl_mem_migration_flags flags,
-																  cl_uint                num_events_in_wait_list,
-																  const cl_event *       event_wait_list,
-																  cl_event *             event) CL_API_SUFFIX__VERSION_1_2
+								      cl_uint                num_mem_objects,
+								      const cl_mem *         mem_objects,
+								      cl_mem_migration_flags flags,
+								      cl_uint                num_events_in_wait_list,
+								      const cl_event *       event_wait_list,
+								      cl_event *             event) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clEnqueueMigrateMemObjectsFCL);
 

@@ -15,12 +15,12 @@ pre-build:
 configure: pre-build
 	@if test -f ${BUILDDIR}/Makefile; \
 	then echo Already configured; \
-	else cd ${BUILDDIR} && cmake -i ${TOPDIR}; \
+	else cd ${BUILDDIR} && cmake ${TOPDIR}; \
 	fi
 .PHONY : configure
 
 reconfigure: pre-build
-	@cd ${BUILDDIR} && cmake -i ${TOPDIR}
+	@cd ${BUILDDIR} && cmake ${TOPDIR}
 .PHONY : reconfigure
 
 debug: pre-build

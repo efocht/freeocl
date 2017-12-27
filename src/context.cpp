@@ -33,14 +33,14 @@
 extern "C"
 {
 	cl_context clCreateContextFCL (const cl_context_properties *properties,
-								   cl_uint num_devices,
-								   const cl_device_id *devices,
-								   void (CL_CALLBACK *pfn_notify)(const char *errinfo,
-																  const void *private_info,
-																  size_t cb,
-																  void *user_data),
-								   void *user_data,
-								   cl_int *errcode_ret)
+                                       cl_uint num_devices,
+                                       const cl_device_id *devices,
+                                       void (CL_CALLBACK *pfn_notify)(const char *errinfo,
+                                                                      const void *private_info,
+                                                                      size_t cb,
+                                                                      void *user_data),
+                                       void *user_data,
+                                       cl_int *errcode_ret)
 	{
 		MSG(clCreateContextFCL);
 		if (devices == NULL
@@ -111,13 +111,13 @@ extern "C"
 	}
 
 	cl_context clCreateContextFromTypeFCL (const cl_context_properties *properties,
-										 cl_device_type device_type,
-										 void (CL_CALLBACK *pfn_notify)(const char *errinfo,
-																		const void *private_info,
-																		size_t cb,
-																		void *user_data),
-										 void *user_data,
-										 cl_int *errcode_ret)
+                                               cl_device_type device_type,
+                                               void (CL_CALLBACK *pfn_notify)(const char *errinfo,
+                                                                              const void *private_info,
+                                                                              size_t cb,
+                                                                              void *user_data),
+                                               void *user_data,
+                                               cl_int *errcode_ret)
 	{
 		MSG(clCreateContextFromType);
 		cl_platform_id platform = 0;
@@ -190,10 +190,10 @@ extern "C"
 	}
 
 	cl_int clGetContextInfoFCL (cl_context context,
-							 cl_context_info param_name,
-							 size_t param_value_size,
-							 void *param_value,
-							 size_t *param_value_size_ret)
+                                    cl_context_info param_name,
+                                    size_t param_value_size,
+                                    void *param_value,
+                                    size_t *param_value_size_ret)
 	{
 		MSG(clGetContextInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -214,11 +214,15 @@ extern "C"
 			}
 			break;
 		case CL_CONTEXT_DEVICES:
-			bTooSmall = FreeOCL::copy_memory_within_limits(&(context->devices.front()), sizeof(cl_device_id) * context->devices.size(), param_value_size, param_value, param_value_size_ret);
+			bTooSmall = FreeOCL::copy_memory_within_limits(&(context->devices.front()),
+                                                                       sizeof(cl_device_id) * context->devices.size(),
+                                                                       param_value_size, param_value, param_value_size_ret);
 			break;
 		case CL_CONTEXT_PROPERTIES:
 			if (!context->properties.empty())
-				bTooSmall = FreeOCL::copy_memory_within_limits(&(context->devices.front()), sizeof(cl_device_id) * context->devices.size(), param_value_size, param_value, param_value_size_ret);
+				bTooSmall = FreeOCL::copy_memory_within_limits(&(context->devices.front()),
+                                                                               sizeof(cl_device_id) * context->devices.size(),
+                                                                               param_value_size, param_value, param_value_size_ret);
 			else
 			{
 				if (param_value != NULL && param_value_size >= sizeof(cl_context_properties))

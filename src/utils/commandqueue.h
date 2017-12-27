@@ -206,7 +206,8 @@ namespace FreeOCL
 	typedef command_common command;
 }
 
-struct _cl_command_queue : public FreeOCL::icd_table, public FreeOCL::ref_counter, public FreeOCL::condition, public FreeOCL::valid_flag, public FreeOCL::context_resource
+struct _cl_command_queue : public FreeOCL::icd_table, public FreeOCL::ref_counter,
+	public FreeOCL::condition, public FreeOCL::valid_flag, public FreeOCL::context_resource
 {
 	_cl_command_queue(cl_context);
 	~_cl_command_queue();

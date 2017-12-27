@@ -125,11 +125,11 @@ extern "C"
 	}
 
 	cl_int clSetEventCallbackFCL (cl_event event,
-							   cl_int command_exec_callback_type,
-							   void (CL_CALLBACK *pfn_event_notify)(cl_event event,
-																	cl_int event_command_exec_status,
-																	void *user_data),
-							   void *user_data)
+                                      cl_int command_exec_callback_type,
+                                      void (CL_CALLBACK *pfn_event_notify)(cl_event event,
+                                                                           cl_int event_command_exec_status,
+                                                                           void *user_data),
+                                      void *user_data)
 	{
 		MSG(clSetEventCallbackFCL);
 		if (command_exec_callback_type != CL_COMPLETE
@@ -176,7 +176,7 @@ extern "C"
 	}
 
 	cl_int clEnqueueMarkerFCL (cl_command_queue command_queue,
-							cl_event *event)
+                                   cl_event *event)
 	{
 		MSG(clEnqueueMarkerFCL);
 		if (event == NULL)
@@ -215,8 +215,8 @@ extern "C"
 	}
 
 	cl_int clEnqueueWaitForEventsFCL (cl_command_queue command_queue,
-								   cl_uint num_events,
-								   const cl_event *event_list)
+                                          cl_uint num_events,
+                                          const cl_event *event_list)
 	{
 		MSG(clEnqueueWaitForEventsFCL);
 		if (num_events == 0 || event_list == NULL)
@@ -236,10 +236,10 @@ extern "C"
 	}
 
 	cl_int clGetEventProfilingInfoFCL (cl_event event,
-									   cl_profiling_info param_name,
-									   size_t param_value_size,
-									   void *param_value,
-									   size_t *param_value_size_ret)
+					   cl_profiling_info param_name,
+					   size_t param_value_size,
+					   void *param_value,
+					   size_t *param_value_size_ret)
 	{
 		MSG(clGetEventProfilingInfoFCL);
 		FreeOCL::unlocker unlock;
@@ -264,9 +264,9 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clEnqueueMarkerWithWaitListFCL(cl_command_queue command_queue,
-																   cl_uint           num_events_in_wait_list,
-																   const cl_event *  event_wait_list,
-																   cl_event *        event) CL_API_SUFFIX__VERSION_1_2
+								       cl_uint           num_events_in_wait_list,
+								       const cl_event *  event_wait_list,
+								       cl_event *        event) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clEnqueueMarkerWithWaitListFCL);
 		if (num_events_in_wait_list == 0 || event_wait_list == NULL)
@@ -294,9 +294,9 @@ extern "C"
 	}
 
 	CL_API_ENTRY cl_int CL_API_CALL	clEnqueueBarrierWithWaitListFCL(cl_command_queue command_queue,
-																	cl_uint           num_events_in_wait_list,
-																	const cl_event *  event_wait_list,
-																	cl_event *        event) CL_API_SUFFIX__VERSION_1_2
+									cl_uint           num_events_in_wait_list,
+									const cl_event *  event_wait_list,
+									cl_event *        event) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clEnqueueBarrierWithWaitListFCL);
 		if (num_events_in_wait_list == 0 || event_wait_list == NULL)

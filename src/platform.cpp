@@ -40,10 +40,10 @@ namespace
 extern "C"
 {
 	cl_int clGetPlatformInfoFCL(cl_platform_id platform,
-							 cl_platform_info param_name,
-							 size_t param_value_size,
-							 void *param_value,
-							 size_t *param_value_size_ret)
+                                    cl_platform_info param_name,
+                                    size_t param_value_size,
+                                    void *param_value,
+                                    size_t *param_value_size_ret)
 	{
 		MSG(clGetPlatformInfoFCL);
 		if (platform != FreeOCL::platform)
@@ -79,21 +79,21 @@ extern "C"
 
 	// The ICD loader needs this version too
 	cl_int clGetPlatformInfo(cl_platform_id platform,
-							 cl_platform_info param_name,
-							 size_t param_value_size,
-							 void *param_value,
-							 size_t *param_value_size_ret)
+                                 cl_platform_info param_name,
+                                 size_t param_value_size,
+                                 void *param_value,
+                                 size_t *param_value_size_ret)
 	{
 		return clGetPlatformInfoFCL(platform,
-									param_name,
-									param_value_size,
-									param_value,
-									param_value_size_ret);
+                                            param_name,
+                                            param_value_size,
+                                            param_value,
+                                            param_value_size_ret);
 	}
 
 	cl_int clIcdGetPlatformIDsKHR (cl_uint num_entries,
-							 cl_platform_id *platforms,
-							 cl_uint *num_platforms)
+                                       cl_platform_id *platforms,
+                                       cl_uint *num_platforms)
 	{
 		MSG(clIcdGetPlatformIDsKHR);
 		if ((num_entries != 0 && platforms == NULL)
@@ -110,7 +110,7 @@ extern "C"
 	}
 
 	CL_API_ENTRY void * CL_API_CALL	clGetExtensionFunctionAddressForPlatformFCL(cl_platform_id platform,
-																				const char *   func_name) CL_API_SUFFIX__VERSION_1_2
+										    const char *   func_name) CL_API_SUFFIX__VERSION_1_2
 	{
 		MSG(clGetExtensionFunctionAddressForPlatformFCL);
 		if (platform != FreeOCL::platform)

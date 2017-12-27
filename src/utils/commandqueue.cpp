@@ -58,9 +58,9 @@ namespace FreeOCL
 extern "C"
 {
 	cl_command_queue clCreateCommandQueueFCL (cl_context context,
-										   cl_device_id device,
-										   cl_command_queue_properties properties,
-										   cl_int *errcode_ret)
+						  cl_device_id device,
+						  cl_command_queue_properties properties,
+						  cl_int *errcode_ret)
 	{
 		MSG(clCreateCommandQueueFCL);
 		if (properties & ~(CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE | CL_QUEUE_PROFILING_ENABLE))
@@ -122,10 +122,10 @@ extern "C"
 	}
 
 	cl_int clGetCommandQueueInfoFCL (cl_command_queue command_queue,
-									 cl_command_queue_info param_name,
-									 size_t param_value_size,
-									 void *param_value,
-									 size_t *param_value_size_ret)
+					 cl_command_queue_info param_name,
+					 size_t param_value_size,
+					 void *param_value,
+					 size_t *param_value_size_ret)
 	{
 		MSG(clGetCommandQueueInfoFCL);
 		if (!FreeOCL::is_valid(command_queue))
@@ -134,10 +134,10 @@ extern "C"
 		bool bTooSmall = false;
 		switch(param_name)
 		{
-		case CL_QUEUE_CONTEXT:			bTooSmall = SET_VAR(command_queue->context);	break;
-		case CL_QUEUE_DEVICE:			bTooSmall = SET_VAR(command_queue->device);	break;
+		case CL_QUEUE_CONTEXT:		bTooSmall = SET_VAR(command_queue->context);	break;
+		case CL_QUEUE_DEVICE:		bTooSmall = SET_VAR(command_queue->device);	break;
 		case CL_QUEUE_REFERENCE_COUNT:	bTooSmall = SET_VAR(command_queue->get_ref_count());	break;
-		case CL_QUEUE_PROPERTIES:		bTooSmall = SET_VAR(command_queue->properties);	break;
+		case CL_QUEUE_PROPERTIES:	bTooSmall = SET_VAR(command_queue->properties);	break;
 		default:
 			command_queue->unlock();
 			return CL_INVALID_VALUE;
@@ -150,9 +150,9 @@ extern "C"
 	}
 
 	cl_int clSetCommandQueuePropertyFCL (cl_command_queue command_queue,
-										 cl_command_queue_properties properties,
-										 cl_bool enable,
-										 cl_command_queue_properties *old_properties)
+					     cl_command_queue_properties properties,
+					     cl_bool enable,
+					     cl_command_queue_properties *old_properties)
 	{
 		if (properties & ~(CL_QUEUE_PROFILING_ENABLE | CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE))
 			return CL_INVALID_VALUE;

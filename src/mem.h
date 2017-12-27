@@ -27,12 +27,13 @@ namespace FreeOCL
 	struct mem_call_back
 	{
 		void (CL_CALLBACK *pfn_notify)(cl_mem memobj,
-									   void *user_data);
+					       void *user_data);
 		void *user_data;
 	};
 }
 
-struct _cl_mem : public FreeOCL::icd_table, public FreeOCL::ref_counter, public FreeOCL::mutex, public FreeOCL::valid_flag, public FreeOCL::context_resource
+struct _cl_mem : public FreeOCL::icd_table, public FreeOCL::ref_counter,
+	public FreeOCL::mutex, public FreeOCL::valid_flag, public FreeOCL::context_resource
 {
 	_cl_mem(cl_context);
 	~_cl_mem();

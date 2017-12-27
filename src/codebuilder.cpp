@@ -62,13 +62,13 @@ namespace FreeOCL
 	}
 
 	std::string build_program(const std::string &options,
-							  const std::string &code,
-							  std::stringstream &log,
-							  FreeOCL::set<std::string> &kernels,
-							  bool &b_valid_options,
-							  const bool b_compile_only,
-							  const FreeOCL::map<std::string, std::string> &headers,
-							  std::string *temporary_filename)
+				  const std::string &code,
+				  std::stringstream &log,
+				  FreeOCL::set<std::string> &kernels,
+				  bool &b_valid_options,
+				  const bool b_compile_only,
+				  const FreeOCL::map<std::string, std::string> &headers,
+				  std::string *temporary_filename)
 	{
 		b_valid_options = true;
 
@@ -192,10 +192,10 @@ namespace FreeOCL
 		}
 
 		const std::string &preprocessed_code = preprocess_code(code,
-															   macros,
-															   log,
-															   include_paths,
-															   headers);
+								       macros,
+								       log,
+								       include_paths,
+								       headers);
 
 		if (preprocessed_code.empty())
 			return std::string();
@@ -291,10 +291,10 @@ namespace FreeOCL
 	}
 
 	std::string preprocess_code(const std::string &code,
-								const std::vector<std::pair<std::string, std::string> > &options,
-								std::stringstream &log,
-								const std::vector<std::string> &include_paths,
-								const map<std::string, std::string> &headers)
+				    const std::vector<std::pair<std::string, std::string> > &options,
+				    std::stringstream &log,
+				    const std::vector<std::string> &include_paths,
+				    const map<std::string, std::string> &headers)
 	{
 		log << "preprocessor log:" << std::endl;
 
@@ -399,7 +399,11 @@ namespace FreeOCL
 		return _out.str();
 	}
 
-	std::string validate_code(const std::string &code, std::stringstream &log, FreeOCL::set<std::string> &kernels, const bool b_debug_mode, const bool b_warnings_as_errors)
+	std::string validate_code(const std::string &code,
+				  std::stringstream &log,
+				  FreeOCL::set<std::string> &kernels,
+				  const bool b_debug_mode,
+				  const bool b_warnings_as_errors)
 	{
 		log << "code validator log:" << std::endl;
 		log << "code:" << std::endl << code << std::endl;
@@ -418,7 +422,8 @@ namespace FreeOCL
 			p.get_ast()->write(gen);
 
 		gen << std::endl;
-		for(FreeOCL::map<std::string, smartptr<kernel> >::const_iterator i = p.get_kernels().begin(), end = p.get_kernels().end() ; i != end ; ++i)
+		for(FreeOCL::map<std::string, smartptr<kernel> >::const_iterator i = p.get_kernels().begin(),
+			    end = p.get_kernels().end() ; i != end ; ++i)
 		{
 			kernels.insert(i->first);
 
@@ -474,10 +479,10 @@ namespace FreeOCL
 				const bool b_restrict = FreeOCL::contains_word(type_name, "restrict");
 				const bool b_volatile = FreeOCL::contains_word(b_pointer ? ptr->get_base_type()->get_name() : type_name, "volatile");
 				const char *keywords_to_be_removed[] = { "__global", "__local", "__constant", "__private",
-														 "global", "local", "constant", "private",
-														 "volatile", "restrict", "const",
-														 "__read_only", "__read_write", "__write_only",
-														 "read_only", "read_write", "write_only", 0 };
+									 "global", "local", "constant", "private",
+									 "volatile", "restrict", "const",
+									 "__read_only", "__read_write", "__write_only",
+									 "read_only", "read_write", "write_only", 0 };
 				FreeOCL::remove_words(type_name, keywords_to_be_removed);
 				int type_id = 0;
 				if (b_pointer)
@@ -558,7 +563,7 @@ namespace FreeOCL
 				<< std::endl;
 			bool b_needs_sync = false;
 			static const char *sync_functions[] = {"barrier", "mem_fence", "read_mem_fence", "write_mem_fence",
-												   "wait_group_events", "async_work_group_copy", "async_work_group_strided_copy"};
+							       "wait_group_events", "async_work_group_copy", "async_work_group_strided_copy"};
 			for(size_t j = 0 ; j < sizeof(sync_functions) / sizeof(sync_functions[0]) && !b_needs_sync ; ++j)
 				b_needs_sync = i->second->has_references_to(sync_functions[j]);
 			gen	<< "\treturn " << (b_needs_sync ? "true" : "false") << ';' << std::endl
@@ -577,7 +582,7 @@ namespace FreeOCL
 				<< std::endl;
 
 #ifdef FREEOCL_OS_WINDOWS
-            gen << "extern \"C\" void __FCL_kernel_" << i->first << "(DUMMYARGS const int thread_id)" << std::endl;
+			gen << "extern \"C\" void __FCL_kernel_" << i->first << "(DUMMYARGS const int thread_id)" << std::endl;
 #else
 			gen << "extern \"C\" void __FCL_kernel_" << i->first << "(const int thread_id)" << std::endl;
 #endif
@@ -647,9 +652,9 @@ namespace FreeOCL
 	}
 
 	std::string link_program(const std::string &options,
-							 const std::vector<std::string> &files_to_link,
-							  std::stringstream &log,
-							  bool &b_valid_options)
+				 const std::vector<std::string> &files_to_link,
+				 std::stringstream &log,
+				 bool &b_valid_options)
 	{
 		b_valid_options = true;
 
@@ -720,15 +725,15 @@ namespace FreeOCL
 		if (b_library)	// Static library (CL_PROGRAM_BINARY_TYPE_LIBRARY)
 		{
 			cmd << "ar rcs "
-				<< filename_out;
+			    << filename_out;
 		}
 		else			// Shared library (CL_PROGRAM_BINARY_TYPE_EXECUTABLE)
 		{
 			cmd << RUNTIME_FREEOCL_CXX_COMPILER
-				<< RUNTIME_FREEOCL_CXX_FLAGS
-				<< RUNTIME_FREEOCL_CXX_INCLUDE
-				<< compiler_extra_args
-				<< " -o " << filename_out;
+			    << RUNTIME_FREEOCL_CXX_FLAGS
+			    << RUNTIME_FREEOCL_CXX_INCLUDE
+			    << compiler_extra_args
+			    << " -o " << filename_out;
 		}
 		for(size_t i = 0 ; i < files_to_link.size() ; ++i)
 			cmd	<< ' ' << files_to_link[i];
